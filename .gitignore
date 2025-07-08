@@ -1,0 +1,9 @@
+# Dependencies
+/node_modules
+
+# Logs
+session_log.md
+
+# Backups
+backup_v*
+*.bak
