@@ -2,6 +2,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Prevents scrollbars from appearing */
 }
 
 body {
@@ -9,77 +10,108 @@ body {
     background-color: #111;
     color: #eee;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
     color: #fff;
     text-shadow: 0 0 10px #fff;
+    flex-shrink: 0; /* Prevent h1 from shrinking */
 }
 
-#main-container {
-    display: flex;
-    justify-content: center;
-    align-items: stretch; /* This is key: makes children (game and side-panel) the same height */
-    margin-top: 20px;
+#grid-container {
+    display: grid;
+    grid-template-columns: 800px 350px;
+    grid-template-rows: 450px 150px; /* Game canvas is 600px tall, so 450 + 150 */
     gap: 20px;
+    width: 1170px; /* 800 + 350 + 20 */
+}
+
+.grid-item {
+    background-color: #1a1a1a;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.glow-effect {
+    border: 2px solid #ff00ff;
+    box-shadow: 0 0 15px #ff00ff;
+}
+
+.glow-effect-orange {
+    border: 2px solid #ff8c00;
+    box-shadow: 0 0 15px #ff8c00;
+}
+
+#game-container {
+    padding: 0; /* Canvas will fill this */
 }
 
 #game-canvas {
-    background-color: #222;
-    border: 2px solid #ff00ff;
-    box-shadow: 0 0 15px #ff00ff;
-}
-
-#side-panel {
-    display: flex;
-    flex-direction: column; /* Stack the text boxes vertically */
-    gap: 20px;
-    width: 350px; /* Give the side panel a fixed width */
+    width: 100%;
+    height: 100%;
+    display: block;
 }
 
 #text-guide {
-    border: 2px solid #ff00ff;
-    box-shadow: 0 0 15px #ff00ff;
-    padding: 25px;
-    background-color: #1a1a1a;
     font-family: 'Georgia', serif;
+    font-style: italic;
     color: #ddd;
     line-height: 1.6;
-    font-size: 1.1em;
-    flex-shrink: 0; /* Prevent this from shrinking */
+    font-size: 1.2em; /* Increased font size */
+    overflow: hidden; /* Important for the text-fitting script */
+    justify-content: flex-start;
+}
+
+#text-guide p {
+    margin: 0;
+}
+
+#prestige-rewards {
+    flex-direction: row; /* Icons will be added horizontally */
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 #info-box {
-    border: 2px solid #ff8c00;
-    box-shadow: 0 0 15px #ff8c00;
-    padding: 25px;
-    background-color: #1a1a1a;
     font-family: 'Georgia', serif;
-    color: #ddd;
-    line-height: 1.6;
-    font-size: 1em;
-    flex-grow: 1; /* This is key: makes this box fill the remaining vertical space */
-    display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    text-align: center; /* Center the text */
+}
+
+#info-box p {
+    color: #ff8c00; /* Make text orange */
+    font-size: 1.1em;
+    margin: auto 0; /* Vertical centering */
 }
 
 #info-box h3 {
-    margin-top: 0;
+    margin: 0;
     color: #ff8c00;
 }
 
 #prestige-display {
-    margin-top: auto; /* Pushes this to the bottom */
-    padding: 15px;
+    padding: 10px;
     border-top: 1px solid #ff8c00;
     text-align: center;
     font-size: 1.2em;
     color: #ff8c00;
 }
 
+#prestige-display p {
+    margin: 0;
+}
+
 #donation-link {
-    margin-top: 30px;
-    padding: 15px;
+    margin-top: 20px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     gap: 20px;

@@ -8,20 +8,20 @@
 </head>
 <body>
     <h1>Concrescence</h1>
-    <div id="main-container">
-        <div id="game-container">
-            <canvas id="game-canvas" class="glow-effect"></canvas>
+    <div id="grid-container">
+        <div id="game-container" class="grid-item glow-effect">
+            <canvas id="game-canvas"></canvas>
         </div>
-        <div id="side-panel">
-            <div id="text-guide" class="glow-effect">
-                <p>In the beginning, there was only Habit. A universe of sameness, repeating endlessly. But within the stillness, a flicker of Potential resides, waiting to be awakened.</p>
-            </div>
-            <div id="info-box" class="glow-effect-orange">
-                <h3>About the Game</h3>
-                <p>This game is a small interactive simulation inspired by the ideas of Terence McKenna's Novelty Theory. It explores the cosmic struggle between Habit, the tendency towards repetition, and Novelty, the emergence of new and complex forms.</p>
-                <div id="prestige-display" class="glow-effect-orange">
-                    <p>Prestige Level: <span id="prestige-level">0</span></p>
-                </div>
+        <div id="text-guide" class="grid-item glow-effect">
+            <p>In the beginning, there was only Habit. A universe of sameness, repeating endlessly. But within the stillness, a flicker of Potential resides, waiting to be awakened.</p>
+        </div>
+        <div id="prestige-rewards" class="grid-item glow-effect">
+            <!-- Prestige icons will be added here by JavaScript -->
+        </div>
+        <div id="info-box" class="grid-item glow-effect-orange">
+            <p>This is a small interactive simulation inspired by the ideas of Terence McKenna's Novelty Theory.</p>
+            <div id="prestige-display">
+                <p>Prestige Level: <span id="prestige-level">0</span></p>
             </div>
         </div>
     </div>
