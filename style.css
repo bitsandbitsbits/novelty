@@ -1,10 +1,14 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: sans-serif;
     background-color: #111;
     color: #eee;
     text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
 h1 {
@@ -61,6 +65,15 @@ h1 {
 
 #info-box h3 {
     margin-top: 0;
+    color: #ff8c00;
+}
+
+#prestige-display {
+    margin-top: auto; /* Pushes this to the bottom */
+    padding: 15px;
+    border-top: 1px solid #ff8c00;
+    text-align: center;
+    font-size: 1.2em;
     color: #ff8c00;
 }
 

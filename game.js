@@ -18,6 +18,7 @@ canvas.height = config.height;
 // Game state
 let novelty = 0;
 const maxNovelty = 100;
+let prestigeLevel = 0;
 let isPaused = false;
 let concrescenceReached = false;
 let gameObjects = [];
@@ -204,7 +205,7 @@ class GameObject {
 
 // --- Game Logic ---
 let animationFrameId;
-function init() {
+function init(isPrestige = false) {
     if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
     }
@@ -214,6 +215,11 @@ function init() {
     gameObjects = [];
     particles = [];
     currentNarrativeIndex = 0;
+
+    if (!isPrestige) {
+        prestigeLevel = 0;
+    }
+    document.getElementById('prestige-level').textContent = prestigeLevel;
 
     for (let i = 0; i < 20; i++) {
         const x = Math.random() * config.width; const y = Math.random() * config.height;
@@ -371,6 +377,14 @@ function gameLoop() {
 
 function startConcrescence() {
     concrescenceReached = true;
+    prestigeLevel++;
+    document.getElementById('prestige-level').textContent = prestigeLevel;
+    
+    // A brief pause to enjoy the moment before reset
+    setTimeout(() => {
+        init(true);
+    }, 3000); 
+
     gameObjects.forEach(obj => { obj.type = 'complex'; obj.dx = 0; obj.dy = 0; });
     document.getElementById('text-guide').innerHTML = `<p>${narrativeChapters[narrativeChapters.length - 1].text}</p>`;
 }
@@ -421,7 +435,12 @@ canvas.addEventListener('click', (event) => {
         if (obj.type === 'habit' && mouseX >= obj.x && mouseX <= obj.x + obj.size && mouseY >= obj.y && mouseY <= obj.y + obj.size) {
             playSound('click');
             obj.type = 'novelty'; obj.dx = 0; obj.dy = 0;
-            obj.noveltyTimer = 120 + Math.random() * 180;
+            // Prestige makes decay faster
+            const baseDecayTime = 120;
+            const decayReduction = prestigeLevel * 10;
+            obj.noveltyTimer = (baseDecayTime - decayReduction) + Math.random() * 180;
+            if (obj.noveltyTimer < 20) obj.noveltyTimer = 20; // Ensure a minimum decay time
+
             if (novelty < maxNovelty) { novelty += 5; }
             break;
         }
